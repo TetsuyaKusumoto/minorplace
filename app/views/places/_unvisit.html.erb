@@ -1,0 +1,6 @@
+<%= link_to "" , 
+  ownership_path( current_user.visits.find_by(:place_id => place.id) , 
+    place_id: place.id , type: "Visit") ,
+  :class => "visit-#{place.id} btn-visit btn btn-warning btn-sm visited",
+  :remote => true,
+  :method => :delete %> 

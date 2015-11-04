@@ -1,0 +1,2 @@
+class Visit < Ownership
+end

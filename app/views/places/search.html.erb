@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-6">
+    <%= render 'search_form' %>
+  </div>
+  <div class="col-md-6">
+    <div class="box">
+      <div class="box-inner">
+        <div class="map_container">
+          <div id="map" class="map_canvas"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="search-result">
+  <% if @searched_places.present? %>
+    <%= render 'searched_places' , searched_places: @searche_places %>
+  <% elsif params[:search].present? %>
+    <div class="alert alert-danger">
+      <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+      検索したアイテムはありません
+    </div>
+  <% end %>
+</div>
+</div>

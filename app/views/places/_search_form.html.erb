@@ -1,0 +1,11 @@
+<div class="box">
+  <h3 class="box-title">マイナープレイスを検索しよう！</h3>
+  <div class="box-inner">
+    <%= form_tag(search_place_path, method:'get', role:"search") do %>
+      <div class="form-group">
+        <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"探す" %>
+        <%= submit_tag "Search", style: "display:none", :name => nil %>
+      </div>
+    <% end %>
+  </div>
+</div>

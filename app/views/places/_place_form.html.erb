@@ -1,0 +1,30 @@
+<div class="box">
+  <h3 class="box-title">あなたのマイナープレイスを登録しよう！</h3>
+  <div class="box-inner">
+    <%= form_for(@place) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <div class="form-group">
+        <%= f.text_field :name, class: "form-control", placeholder: "登録名" %>
+      </div>
+      <div class="form-group">
+        <%= f.text_field :address, class: "form-control", placeholder: "住所" %>
+      </div>
+      または、地図のピンの位置
+      <div class="form-group">  
+          <%= f.text_field :latitude, :id => "latitude", class: "form-control", placeholder: "緯度" %>
+      </div>
+      <div class="form-group">  
+          <%= f.text_field :longitude, :id => "longitude", class: "form-control", placeholder: "経度" %>
+      </div>
+      <div class="form-group">
+        <%= f.text_area :comment, class: "form-control", placeholder:"コメントを入力してください", rows:"2"  %>
+      </div>
+      <div class="form-group">
+        <%= f.file_field :photo, class: "form-control input-sm", placeholder:"あなたの写真" %>
+      </div>
+      <div class="submit-group">
+        <%= f.submit "登録する", class: "btn btn-success" %>
+      </div>
+    <% end %>
+  </div>
+</div>

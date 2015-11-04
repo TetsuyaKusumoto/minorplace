@@ -1,0 +1,18 @@
+<div class="action">
+  <%# binding.pry %>
+  <% if current_user.want? place %>
+    <%= render 'places/unwant' , place: place %>
+  <% else %>
+    <%= render 'places/want' , place: place %>
+  <% end %> 
+
+  <% if current_user.visit? place %>
+    <%= render 'places/unvisit' , place: place %>
+  <% else %>
+    <%= render 'places/visit' , place: place %>
+  <% end %>
+
+  <% unless current_page?(place) %>
+    <%= link_to "詳細" , place , class: "btn btn-info btn-sm" %>
+  <% end %>
+</div>

@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="container-inner inner-sm clearfix">
+    <div class="item-single-main">
+      <div class="image">
+        <div class="img-wrap">
+          <% #TODO 商品イメージ %>
+          <% if image.present? %>
+            <%= image_tag(image , alt: title) %>
+          <% else %>
+            <%= image_tag("no-image.png" , alt: title) %>
+          <% end %>
+        </div>
+      </div>
+      <div class="title">
+        <% #TODO 商品タイトル %>
+        <% if title.present? %>
+          <%= title %>  
+        <% else %>
+          no title
+        <% end %>
+      </div>
+      <%= render 'ranking/top10' , rank: rank %>
+      <%#　<button type="button" class="btn btn-success action">number 1</button> %>
+    </div>
+    <div class="item-single-side">
+      <div class="side-box">
+        <h4 class="side-box-title">ユーザ数</h4>
+        <div class="side-box-body">
+          <% if count.blank? %>
+            みんなのモノリスト募集中
+          <% else %>
+            <span class="badge"><%= count %>人</span>
+          <% end %>
+          <% # TODO Haveしたユーザー一覧 %>
+          <%# @item.have_users.each do |user| %>
+            <%# link_to gravatar_for(user, size: 30), user %>
+          <%# end %>
+        </div>
+      </div>
+      <div class="side-box">
+        <h4 class="side-box-title">みんなのレビュー</h4>
+        <div class="side-box-body">
+          under construction 
+
+          <% # TODO Wantしたユーザー一覧 %>
+          <%# @item.want_users.each do |user| %>
+            <%# link_to gravatar_for(user, size: 30), user %>
+          <%# end %>
+        </div>
+      </div>
+      <div class="text-center">
+        <% #TODO 正しいリンク先に %>
+        <%= link_to(image_tag("amazon-button.png", {alt: "Amazon詳細ページへ"}), url) %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+<%= link_to "" , ownerships_path(place_id: place.id , type: "Want") ,
+    :class => "want-#{place.id} btn-want btn btn-danger btn-sm want",
+    :remote => true,
+    :method => :post %>

@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="container-inner inner-default clearfix">
+    <% @searched_places.each do |place| %>
+      <div class="item-box">
+        <div class="image">
+          <div class="img-wrap">
+            <% #TODO 商品画像 %>
+            <% @url = place.photo.url %>
+            <% if @url.present? %>
+              <%= image_tag(@url , alt: place.name) %>
+            <% else %>
+              <%= image_tag("no-image.png" , alt: place.name) %>
+            <% end %>
+          </div>
+        </div>
+        <div class="detail">
+          <p class="title">
+            <% #TODO 商品タイトル %>
+            <% @title = place.name %>
+            <% if @title.present? %>
+              <%= @title %> 
+            <% else %>
+              no title
+            <% end %>
+          </p>
+        </div>
+        <div class="action clearfix">
+          <%= link_to "" , ownerships_path(place_id: place.id , type: "Want") ,
+                      :class => "want-#{place.id} btn-want btn btn-danger btn-sm want",
+                      :remote => true,
+                      :method => :post %>
+          <%= link_to "" , ownerships_path(place_id: place.id , type: "Visit") ,
+                      :class => "visit-#{place.id} btn-visit btn btn-warning btn-sm visit",
+                      :remote => true,
+                      :method => :post %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

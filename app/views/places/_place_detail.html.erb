@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="container-inner inner-sm clearfix">
+    <div class="item-single-main">
+      <div class="image">
+        <div class="img-wrap">
+          <% #TODO 商品イメージ %>
+          <%# binding.pry %>
+          <% @url = @place.photo.url %>
+          <% if @url.present? %>
+            <%= image_tag(@url , alt: @place.name) %>
+          <% else %>
+            <%= image_tag("no-image.png" , alt: @place.name) %>
+          <% end %>
+        </div>
+      </div>
+      <div class="title">
+        <% #TODO 商品タイトル %>
+        <% @name = @place.name %>
+        <% if @name.present? %>
+          <%= @name %> 
+        <% else %>
+          no title
+        <% end %>
+      </div>
+      <%= render 'action' , place: @place %>
+    </div>
+    <div class="item-single-side">
+      <div class="side-box">
+        <h4 class="side-box-title">登録者</h4>
+        <div class="side-box-body">
+          <%= @place.create_user_name %>
+        </div>
+      </div>
+      <div class="side-box">
+        <h4 class="side-box-title">おすすめポイント</h4>
+        <div class="side-box-body">
+          <%= @place.comment %>
+        </div>
+      </div>      
+      <div class="side-box">
+        <h4 class="side-box-title">行った！ユーザー</h4>
+        <div class="side-box-body">
+          <% # TODO Haveしたユーザー一覧 %>
+          <% @place.visit_users.each do |user| %>
+            <%#= link_to gravatar_for(user, size: 30), user %>
+          <% end %>
+        </div>
+      </div>
+      <div class="side-box">
+        <h4 class="side-box-title">Wantしたユーザー</h4>
+        <div class="side-box-body">
+          <% # TODO Wantしたユーザー一覧 %>
+          <% @place.want_users.each do |user| %>
+            <%#= link_to gravatar_for(user, size: 30), user %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

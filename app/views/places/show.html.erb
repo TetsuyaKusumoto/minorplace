@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-12">
+    <%= render 'place_detail' %>
+  </div>
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-inner">
+        <div class="map_container">
+          <div id="big_map" class="map_canvas"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'big_map'}}, function(){
+      markers = handler.addMarkers(<%= raw(@hash.to_json) %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+    });
+</script>
+

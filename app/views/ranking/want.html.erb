@@ -1,0 +1,4 @@
+<h2 class="text-center">みんながWantしてるランキング</h2>
+<% @arr.each do |info| %>
+  <%= render partial: 'ranking/ranking_item', locals: { title: info[2], image: info[3], url: info[4], description: info[5], rank: info[6], count: info[1]  } %>
+<% end %>

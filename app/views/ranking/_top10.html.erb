@@ -1,0 +1,11 @@
+<div class="rank">
+  <% if rank == 1 %>
+    <span  class="label label-success" >第1位</span>
+  <% elsif rank == 2%>
+    <span  class="label label-primary" >第2位</span>
+  <% elsif rank == 3%>
+    <span  class="label label-info">第3位</span>
+  <% else %>
+    <span  class="label label-warning">第<%= rank %>位</span>
+  <% end %> 
+</div>
