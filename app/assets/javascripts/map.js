@@ -1,4 +1,4 @@
-$(function() {
+/*$(function() {
   handler = Gmaps.build('Google');
   handler.buildMap({provider: {}, internal: {id: 'map'}}, function(){
   markers = handler.addMarkers([
@@ -24,3 +24,4 @@ function updateFormLocation(latLng) {
   $('#longitude').val(latLng.lng());
 }
 });
+*/

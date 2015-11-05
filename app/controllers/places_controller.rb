@@ -22,11 +22,16 @@ class PlacesController < ApplicationController
       marker.lat place.latitude
       marker.lng place.longitude
     end
-    binding.pry
+#    binding.pry
   end
   def search
     @searched_places = Place.search(params[:search])
-    binding.pry
+    @hash = Gmaps4rails.build_markers(@searched_places) do |place, marker|
+      marker.lat place.latitude
+      marker.lng place.longitude
+      marker.infowindow place.name
+    end
+#    binding.pry
     render 'places/search'
   end
   private
