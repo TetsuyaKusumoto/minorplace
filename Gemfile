@@ -34,6 +34,9 @@ gem 'geocoder'
 gem 'elasticsearch-rails'
 gem 'elasticsearch-model'
 gem 'paperclip'
+gem 'jpmobile'
+gem 'jpmobile-ipaddresses'
+gem 'jpmobile-terminfo'
 gem 'pry-byebug', group: :development
 # Use Unicorn as the app server
 # gem 'unicorn'

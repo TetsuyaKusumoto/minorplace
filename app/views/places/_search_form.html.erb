@@ -6,6 +6,13 @@
         <%= text_field_tag :search, params[:search], class:"form-control", placeholder:"探す" %>
         <%= submit_tag "Search", style: "display:none", :name => nil %>
       </div>
+      <div class="form-group">
+        <p><b>現在地からの検索の範囲を指定してください</b></p>
+        <label><%= radio_button_tag "distance", "no",true,{ :class => "rd"} %> 指定なし </label>
+        <label><%= radio_button_tag "distance", "1km",false,{ :class => "rd"} %> 1km </label>
+        <label><%= radio_button_tag "distance", "5km",false,{ :class => "rd"} %> 5km </label>
+        <label><%= radio_button_tag "distance", "10km",false,{ :class => "rd"} %> 10km </label>
+      </div>
     <% end %>
   </div>
 </div>

@@ -47,12 +47,19 @@
         </div>
       </div>
       <div class="side-box">
-        <h4 class="side-box-title">Wantしたユーザー</h4>
+        <h4 class="side-box-title">行きたい!ユーザー</h4>
         <div class="side-box-body">
           <% # TODO Wantしたユーザー一覧 %>
           <% @place.want_users.each do |user| %>
             <%#= link_to gravatar_for(user, size: 30), user %>
           <% end %>
+        </div>
+      </div>
+      <div class="side-box">
+        <h4 class="side-box-title">行きたい!ランキング</h4>
+        <div class="side-box-body">
+          <%# binding.pry %>
+          <%= @rank %>
         </div>
       </div>
     </div>

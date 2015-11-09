@@ -2,6 +2,20 @@
   <div class="col-md-12">
     <%= render 'place_detail' %>
   </div>
+
+  <div class="text-center">
+    <% if @ownership.blank? %>
+    <%= link_to create_place_photo_path, remote: true, class: "btn btn-primary" do %>
+      <span class="glyphicon glyphicon-camera"></span> 行った！を登録
+    <% end %>
+    <% else %>
+    <%= link_to "", remote: true, class: "btn btn-success disabled" do %>
+      <span class="glyphicon glyphicon-camera"></span> 登録済
+    <% end %>
+    <% end %>      
+  </div>
+
+  <div id="product-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
   <div class="col-md-12">
     <div class="box">
       <div class="box-inner">

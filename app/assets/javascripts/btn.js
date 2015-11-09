@@ -1,5 +1,5 @@
 $(function(){
-  $('.btn-want,btn-have').on('ajax:send', function(xhr){
-    $('.btn-have,.btn-want').prop("disabled", true);
+  $('.btn-want,btn-visit').on('ajax:send', function(xhr){
+    $('.btn-visit,.btn-want').prop("disabled", true);
   });
 });

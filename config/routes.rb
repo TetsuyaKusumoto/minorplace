@@ -9,12 +9,12 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :relationships, only: [:create, :destroy]
-  resources :ownerships, only: [:create, :destroy]
+  resources :ownerships, only: [:create, :new,  :destroy]
   resources :places , only: [:new , :create, :destroy, :show]
 
   get 'ranking/visit', to: 'ranking#visit', as:'visit_ranking'
   get 'ranking/want', to: 'ranking#want', as:'want_ranking'
-
+  get 'place/:id/ownership', to: 'places#create_place_photo', as:'create_place_photo'
   get 'search', to: 'places#search', as: 'search_place'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

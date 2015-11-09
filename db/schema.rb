@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151102153916) do
+ActiveRecord::Schema.define(version: 20151108080611) do
 
   create_table "ownerships", force: :cascade do |t|
     t.integer  "user_id"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20151102153916) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.string   "comment"
   end
 
   add_index "ownerships", ["place_id"], name: "index_ownerships_on_place_id"

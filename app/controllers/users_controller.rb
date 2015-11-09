@@ -16,7 +16,6 @@ class UsersController < ApplicationController
   def edit
 
   end 
-  def update
   def update 
     if @user.update(user_params)
       flash[:success] = "プロフィールの編集を完了しました"
@@ -25,7 +24,6 @@ class UsersController < ApplicationController
       render 'edit' 
     end
   end 
-  end
   def show
     @places = @user.places.group('places.id')
   end

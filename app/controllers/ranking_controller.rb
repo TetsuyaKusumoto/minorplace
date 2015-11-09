@@ -1,33 +1,31 @@
 class RankingController < ApplicationController
-  def have
-    @rankings_hash = Ownership.where(type: 'Have').select("item_id count_item_id").group("item_id").order('count_item_id desc').limit(10).count("item_id")
+  def visit
+    @rankings_hash = Ownership.where(type: 'Visit').select("place_id count_place_id").group("place_id").order('count_place_id desc').limit(10).count("place_id")
     @arr = Array.new(10){ Array.new(7) }
     index = 0
-    @rankings_hash.each do |item_id, count|
-      @item = Item.find_by(id: item_id)
-      @arr[index][0] = item_id
+    @rankings_hash.each do |place_id, count|
+      @place = Place.find_by(id: place_id)
+      @arr[index][0] = place_id
       @arr[index][1] = count
-      @arr[index][2] = @item.title
-      @arr[index][3] = @item.large_image
-      @arr[index][4] = @item.detail_page_url
-      @arr[index][5] = @item.description
-      @arr[index][6] = (index + 1)
+      @arr[index][2] = @place.name
+      @arr[index][3] = @place.comment
+      @arr[index][4] = @place.photo
+      @arr[index][5] = (index + 1)
       index += 1
     end 
   end
   def want
-    @rankings_hash = Ownership.where(type: 'Want').select("item_id count_item_id").group("item_id").order('count_item_id desc').limit(10).count("item_id")
+    @rankings_hash = Ownership.where(type: 'Want').select("place_id count_place_id").group("place_id").order('count_place_id desc').limit(10).count("place_id")
     @arr = Array.new(10){ Array.new(7) }
     index = 0
-    @rankings_hash.each do |item_id, count|
-      @item = Item.find_by(id: item_id)
-      @arr[index][0] = item_id
+    @rankings_hash.each do |place_id, count|
+      @place = Place.find_by(id: place_id)
+      @arr[index][0] = place_id
       @arr[index][1] = count
-      @arr[index][2] = @item.title
-      @arr[index][3] = @item.large_image
-      @arr[index][4] = @item.detail_page_url
-      @arr[index][5] = @item.description
-      @arr[index][6] = (index + 1)
+      @arr[index][2] = @place.name
+      @arr[index][3] = @place.comment
+      @arr[index][4] = @place.photo
+      @arr[index][5] = (index + 1)
       index += 1
     end  
   end

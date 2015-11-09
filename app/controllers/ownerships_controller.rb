@@ -2,57 +2,46 @@ class OwnershipsController < ApplicationController
   before_action :logged_in_user
 
   def create
-    if params[:asin]
-      @item = Item.find_or_initialize_by(asin: params[:asin])
-    else
-      @item = Item.find(params[:item_id])
-    end
-
-    # itemsテーブルに存在しない場合はAmazonのデータを登録する。
-    if @item.new_record?
-      begin
-        # TODO 商品情報の取得 Amazon::Ecs.item_lookupを用いてください
-        response = Amazon::Ecs.item_lookup(@item.asin,
-                                 # :search_index => 'All' ,
-                                  :response_group => 'Medium' ,
-                                  :country => 'jp')
-      rescue Amazon::RequestError => e
-        return render :js => "alert('#{e.message}')"
-      end
-
-      amazon_item       = response.items.first
+    #binding.pry
+    @ownership = Ownership.new(ownership_params)
+    #binding.pry
+    if params[:place_id]
+      @ownership.place_id = params[:place_id]
+      #@ownership.photo = params[:photo]
+      #@ownership.comment = params[:comment]
       #binding.pry
-      @item.title        = amazon_item.get('ItemAttributes/Title')
-      @item.small_image  = amazon_item.get("SmallImage/URL")
-      @item.medium_image = amazon_item.get("MediumImage/URL")
-      @item.large_image  = amazon_item.get("LargeImage/URL")
-      @item.detail_page_url = amazon_item.get("DetailPageURL")
-      @item.raw_info        = amazon_item.get_hash
-      @item.save!
-    end
-
-    # TODO ユーザにwant or haveを設定する
-    # params[:type]の値ににHaveボタンが押された時には「Have」,
-    # Wantボタンがされた時には「Want」が設定されています。
-    
-    # binding.pry
-    if params[:type] == 'Have'
-      current_user.have(@item) 
+     # @place = Place.find_or_initialize_by(id: params[:id])
     else
-      current_user.want(@item)
+      @place = Place.find(params[:place_id])
+    end
+    @place = Place.find(params[:place_id])
+    
+    #binding.pry
+    if params[:type] == 'Visit'
+      current_user.visit(@ownership) 
+      redirect_to @place
+    else
+      current_user.want(@ownership)
     end
   end
-
+  def new
+#    @ownership = Ownership.new
+#    @ownership.place_id = params[:id]
+  end
   def destroy
-    @item = Item.find(params[:item_id])
-
+    @place = Place.find(params[:place_id])
+    #binding.pry
     # TODO 紐付けの解除。 
-    # params[:type]の値ににHavedボタンが押された時には「Have」,
+    # params[:type]の値ににVisitdボタンが押された時には「Visit」,
     # Wantedボタンがされた時には「Want」が設定されています。
-    if params[:type] == 'Have'
-      current_user.unhave(@item)
+    if params[:type] == 'Visit'
+      current_user.unvisit(@place)
     else
-      current_user.unwant(@item)
+      current_user.unwant(@place)
     end
+  end
+  def ownership_params
+    
+    params.fetch(:ownership, {}).permit(:place_id, :type,  :photo, :comment)
   end
 end

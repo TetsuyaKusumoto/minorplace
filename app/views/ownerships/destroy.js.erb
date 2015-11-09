@@ -1,7 +1,7 @@
-<% if params[:type] == "Have" %>
-  $(".have-<%= @item.id %>").replaceWith("<%= escape_javascript(render('items/have' , item: @item)) %>");
+<% if params[:type] == "Visit" %>
+  $(".visit-<%= @place.id %>").replaceWith("<%= escape_javascript(render('places/visit' , place: @place)) %>");
 <% else %>
-  $(".want-<%= @item.id %>").replaceWith("<%= escape_javascript(render('items/want' , item: @item)) %>");
+  $(".want-<%= @place.id %>").replaceWith("<%= escape_javascript(render('places/want' , place: @place)) %>");
 <% end %>
 
-$('.btn-have,.btn-want').removeAttr('disabled');
+$('.btn-visit,.btn-want').removeAttr('disabled');

@@ -30,27 +30,36 @@ class User < ActiveRecord::Base
   def following?(other_user)
     following_users.include?(other_user)
   end
-  def visit(places)
-    visits.find_or_create_by(places_id: item.id) #katteni user_id hairu? soujanaku, user no have_places to kaishaku?
+  def visit(ownership)
+#    visits.find_or_create_by(place_id: ownership.place_id, photo: ownership.photo, comment: ownership.comment) #katteni user_id hairu? soujanaku, user no have_places to kaishaku?
+#     visits.find_or_create_by(place_id: ownership.place_id)
+     visit = visits.build(place_id: ownership.place_id, photo: ownership.photo, comment: ownership.comment)  
+     # check logic
+     if visits.find_by(place_id: ownership.place_id)
+     else
+       visit.save
+     end
+     #binding.pry
   end
 
-  def unvisit(places)
-    visits.find_by(places_id: item.id).destroy
+  def unvisit(place)
+    visits.find_by(place_id: place.id).destroy
   end
 
-  def visit?(places)
-    visit_places.include?(places)
+  def visit?(place)
+    visit_places.include?(place)
   end
 
-  def want(places)
-    wants.find_or_create_by(places_id: item.id)
+  def want(ownership)
+    wants.find_or_create_by(place_id: ownership.place_id)
   end
 
-  def unwant(places)
-    wants.find_by(places_id: item.id).destroy
+  def unwant(place)
+    #binding.pry
+    wants.find_by(place_id: place.id).destroy
   end
 
-  def want?(places)
-    want_places.include?(places)
+  def want?(place)
+    want_places.include?(place)
   end
 end
