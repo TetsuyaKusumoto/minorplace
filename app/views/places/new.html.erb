@@ -13,21 +13,13 @@
   </div>
 </div>
 
-<script type="text/javascript">   
-  handler = Gmaps.build('Google');
-  handler.buildMap({provider: {}, internal: {id: 'map'}}, function(){
-  markers = handler.addMarkers([
-    {
-      lat: 35.20, lng: 139.49
-    }
-    ],
-    {
-      draggable: true
-    }
-  );
-  handler.getMap().setZoom(6);
-  handler.map.centerOn({lat: 35.397, lng: 139.644});
-  //handler.bounds.extendWith(markers);
+<script type="text/javascript"> 
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+      markers = handler.addMarkers(<%= raw(@hash.to_json) %>, { draggable: true});
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+ //handler.bounds.extendWith(markers);
 //  handler.bounds.extendWith(pmarker);
   //handler.fitMapToBounds();
   google.maps.event.addListener(markers[0].serviceObject, 'dragend', function() {

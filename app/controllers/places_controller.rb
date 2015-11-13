@@ -4,6 +4,26 @@ class PlacesController < ApplicationController
 
   def new
     @place = Place.new
+    if request.mobile.present?
+      if request.mobile.position.present?
+        binding.pry
+        @latitude   = request.mobile.position.lat
+        @longitude = request.mobile.position.lon
+        @hash = ["lat" => @latitude, "lng" => @longitude]
+      elsif request.location.present?
+        result = request.location
+        @hash = ["lat" => result.latitude, "lng" => result.longitude]
+      else
+        @hash = ["lat" => 35, "lng" => 139.5]
+      end      
+    else
+      if request.location.present?
+        result = request.location
+        @hash = ["lat" => result.latitude, "lng" => result.longitude]
+      else
+        @hash = ["lat" => 35, "lng" => 139.5]
+      end
+    end
   end
   def create
     @place = Place.new(place_params)
@@ -41,10 +61,20 @@ class PlacesController < ApplicationController
 #        })
       end
     #binding.pry
+      
     elsif request.mobile.present?
-      @latitude   = request.mobile.position.lat
-      @longitude = request.mobile.position.lon 
-      @hash = ["lat" => @latitude, "lng" => @longitude]  
+      if request.mobile.position.present?
+        binding.pry
+        @latitude   = request.mobile.position.lat
+        @longitude = request.mobile.position.lon 
+        @hash = ["lat" => @latitude, "lng" => @longitude]
+      elsif request.location.present?
+        result = request.location
+        @hash = ["lat" => result.latitude, "lng" => result.longitude]
+      else
+        @hash = ["lat" => 35, "lng" => 139.5]
+      end
+
     else
       if request.location.present?
         result = request.location

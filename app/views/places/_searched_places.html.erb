@@ -18,9 +18,9 @@
             <% #TODO 商品タイトル %>
             <% @title = place.name %>
             <% if @title.present? %>
-              <%= @title %> 
+              <%= link_to @title, place_path(place) %> 
             <% else %>
-              no title
+              <%= link_to "no title", place_path(place) %>
             <% end %>
           </p>
         </div>
@@ -29,10 +29,12 @@
                       :class => "want-#{place.id} btn-want btn btn-danger btn-sm want",
                       :remote => true,
                       :method => :post %>
+<% if false %>
           <%= link_to "" , ownerships_path(place_id: place.id , type: "Visit") ,
                       :class => "visit-#{place.id} btn-visit btn btn-warning btn-sm visit",
                       :remote => true,
                       :method => :post %>
+<% end %>
         </div>
       </div>
     <% end %>
