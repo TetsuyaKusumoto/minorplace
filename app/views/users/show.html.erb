@@ -5,6 +5,10 @@
 <%= render 'profile' , user: @user %>
 
 <h3 class="text-center">  <span class="label label-info"><%= @user.name %> さんの「行った」</span></h3>
-<%= render 'places/list' , places: @visits %>
+<% if @visits.present? %>
+  <%= render 'places/list' , places: @visits %>
+<% end %>
 <h3 class="text-center">  <span class="label label-info"><%= @user.name %> さんの「マイナーだね」</span></h3>
-<%= render 'places/list' , places: @wants %>
+<% if @wants.present? %>
+  <%= render 'places/list' , places: @wants %>
+<% end %>
