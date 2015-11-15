@@ -11,7 +11,9 @@
       </div>
     </div>
   </div>
-<div class="search-result">
+</div>
+<div class="row">
+ <div class="search-result">
   <% if @searched_places.present? %>
     <%= render 'searched_places' , searched_places: @searched_places %>
   <% elsif params[:search].present? %>
@@ -19,8 +21,8 @@
       <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
       検索したプレイスはありません
     </div>
-  <% end %>
-</div>
+ <% end %>
+ </div> 
 </div>
 <script type="text/javascript">
     handler = Gmaps.build('Google');
