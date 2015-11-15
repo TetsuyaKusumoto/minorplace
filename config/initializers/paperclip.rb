@@ -1,3 +1,4 @@
+if Rails.env.production?
 Paperclip::Attachment.default_options.merge!(
   url: ':s3_domain_url',
   storage: :s3,
@@ -28,3 +29,4 @@ Paperclip::Attachment.default_options.merge!(
     # Convert options in images by default
     # Progressive scan, quality 85% by default, remove exif data
 )
+end
