@@ -2,5 +2,5 @@
   <h2 class="text-center text-info"><span class="label label-primary">みんなの「マイナーだね」ランキング</span></h2>
 </div>
 <% @arr.each do |info| %>
-  <%= render partial: 'ranking/ranking_place', locals: { name: info[2], comment: info[3], url: info[4], ranking: info[5],  count: info[1]  } %>
+  <%= render partial: 'ranking/ranking_place', locals: { name: info[2], comment: info[3], url: info[4], ranking: info[5],  count: info[1] places: info[6] } %>
 <% end %>

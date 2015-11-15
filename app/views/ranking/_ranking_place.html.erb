@@ -40,9 +40,9 @@
       <div class="side-box">
         <h4 class="side-box-title">みんなのレビュー</h4>
         <div class="side-box-body">
-          <% if visits.present? %>
-            <% visits.first(3).each do |visit| %>
-              <%= visit.comment %> by <%= User.find_by(id: visit.user_id).name %>
+          <% if places.present? %>
+            <% places.first(3).each do |place| %>
+              <%= place.comment %> by <%= User.find_by(id: place.user_id).name %>
                <%# binding.pry %>
             <% end %>
           <% else %>
