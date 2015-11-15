@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   end 
   def update 
     if @user.update(user_params)
-      binding.pry
+      #binding.pry
       flash[:success] = "プロフィールの編集を完了しました"
       redirect_to user_path(@user)
     else 
