@@ -9,8 +9,9 @@ class RankingController < ApplicationController
       @arr[index][1] = count
       @arr[index][2] = @place.name
       @arr[index][3] = @place.comment
-      @arr[index][4] = @place.photo
+      @arr[index][4] = @place.photo.url
       @arr[index][5] = (index + 1)
+      @arr[index][6] = @place.visits
       index += 1
     end 
   end
@@ -24,7 +25,7 @@ class RankingController < ApplicationController
       @arr[index][1] = count
       @arr[index][2] = @place.name
       @arr[index][3] = @place.comment
-      @arr[index][4] = @place.photo
+      @arr[index][4] = @place.photo.url
       @arr[index][5] = (index + 1)
       index += 1
     end  

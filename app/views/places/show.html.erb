@@ -26,7 +26,15 @@
     </div>
   </div>
 </div>
-
+<div class="search-result"> 
+  <% if @visited_places.present? %>
+    <%= render 'owned_places' , visited_places: @visited_places %>
+  <% else %> 
+    <div>
+      訪問した人はまだいません
+    </div>
+  <% end %>
+</div> 
 <script type="text/javascript">
     handler = Gmaps.build('Google');
     handler.buildMap({ provider: {}, internal: {id: 'big_map'}}, function(){

@@ -41,8 +41,10 @@ class PlacesController < ApplicationController
     @hash = Gmaps4rails.build_markers(@place) do |place, marker|
       marker.lat place.latitude
       marker.lng place.longitude
+      marker.infowindow render_to_string(:partial => "/places/address_template", :locals => { :place => place})
     end
     @ownership = current_user.visits.find_by( place_id: @place.id)
+    @visited_places = Ownership.where(place_id: @place.id, type: "Visit")
     @rank = @place.want_level
 #    binding.pry
   end

@@ -27,6 +27,10 @@ class UsersController < ApplicationController
   end 
   def show
     @places = @user.places.group('places.id')
+    @up_places = Place.where(id: @user.id)
+    @visits = @user.visit_places.group('ownerships.place_id')
+    @wants = @user.want_places.group('ownerships.place_id')
+    #binding.pry
   end
 
   private

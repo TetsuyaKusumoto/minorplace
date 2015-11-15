@@ -1,22 +1,23 @@
 <div class="container">
   <div class="container-inner inner-default clearfix">
-    <% items.each do |item| %>
+    <% places.each do |place| %>
       <div class="item-box">
         <div class="image">
           <div class="img-wrap">
-            <% if item.large_image.present? %>
-              <%= image_tag(item.large_image , alt: item.title) %>
+            <%#= binding.pry %>
+            <% if place.photo.url.present? %>
+              <%= image_tag(place.photo.url , alt: place.name) %>
             <% else %>
-              <%= image_tag("no-image.png" , alt: item.title) %>
+              <%= image_tag("no-image.png" , alt: place.name) %>
             <% end %>
           </div>
         </div>
         <div class="detail">
-          <p class="title">
-            <%= item.title %>
+          <p class="name">
+            <%= place.name %>
           </p>
         </div>
-        <%= render 'items/action' , item: item if logged_in? %>
+        <%= render 'places/action' , place: place if logged_in? %>
       </div>
     <% end %>
   </div>

@@ -1,8 +1,10 @@
 <% content_for :head do %>
-  <title><%=@user.name %>-monolist</title>
-  <meta name="description" content="<%= @user.name %>のモノページ。<%= @user.name %>の欲しいモノ、持っているモノを表示しています。" />
+  <title><%=@user.name %>-minorplace</title>
+  <meta name="description" content="<%= @user.name %>のマイナーな場所。<%= @user.name %>のマイナーな場所を表示しています。" />
 <% end %>
 <%= render 'profile' , user: @user %>
 
-
-<%# render 'items/list' , items: @items %>
+<h3 class="text-center">  <span class="label label-info"><%= @user.name %> さんの「行った」</span></h3>
+<%= render 'places/list' , places: @visits %>
+<h3 class="text-center">  <span class="label label-info"><%= @user.name %> さんの「マイナーだね」</span></h3>
+<%= render 'places/list' , places: @wants %>

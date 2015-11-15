@@ -1,8 +1,6 @@
 require 'elasticsearch/model'
 
 class Place < ActiveRecord::Base
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
   validates :name, presence: true, length: { maximum: 140 }
   has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }
   validates_attachment :photo, less_than: 5.megabytes, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }, message: 'ファイル形式が不正です'
@@ -24,12 +22,26 @@ class Place < ActiveRecord::Base
 #      Place.all #全て表示。
 #    end
 #  end
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
   def want_level
       count = Ownership.where(type: "want", place_id: self.id).count
-      if count > 1      
-        return "high"
+      if count > 10      
+        return "マイナーだけど大人気！"
+      elsif count > 5
+        return "ちょっとマイナー"
       else
-        return "middle"
+        return "まだまだマイナー"
+      end
+  end
+  def visit_level
+      count = Ownership.where(type: "visit", place_id: self.id).count
+      if count > 10
+        return "みなさんのおかげでメジャーになれました！"
+      elsif count > 5
+        return "ちょっと人気出てきたかも？"
+      else
+        return "まだまだマイナー"
       end
   end
   def self.elasticSearch(search)

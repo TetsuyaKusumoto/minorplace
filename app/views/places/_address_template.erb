@@ -1,0 +1,6 @@
+<% if place.address.present?  %>
+  <%# image_tag(place.photo.url , alt: place.name, size: '80x60') %>
+  <%= place.address %>
+<% else %>
+  no address
+<% end %>

@@ -4,22 +4,22 @@
       <div class="image">
         <div class="img-wrap">
           <% #TODO 商品イメージ %>
-          <% if image.present? %>
-            <%= image_tag(image , alt: title) %>
+          <% if url.present? %>
+            <%= image_tag(url , alt: name) %>
           <% else %>
-            <%= image_tag("no-image.png" , alt: title) %>
+            <%= image_tag("no-image.png" , alt: name) %>
           <% end %>
         </div>
       </div>
       <div class="title">
         <% #TODO 商品タイトル %>
-        <% if title.present? %>
-          <%= title %>  
+        <% if name.present? %>
+          <%= name %>  
         <% else %>
-          no title
+          no name
         <% end %>
       </div>
-      <%= render 'ranking/top10' , rank: rank %>
+      <%= render 'ranking/top10' , ranking: ranking %>
       <%#　<button type="button" class="btn btn-success action">number 1</button> %>
     </div>
     <div class="item-single-side">
@@ -27,7 +27,7 @@
         <h4 class="side-box-title">ユーザ数</h4>
         <div class="side-box-body">
           <% if count.blank? %>
-            みんなのモノリスト募集中
+            マイナープレイス募集中
           <% else %>
             <span class="badge"><%= count %>人</span>
           <% end %>
@@ -40,18 +40,25 @@
       <div class="side-box">
         <h4 class="side-box-title">みんなのレビュー</h4>
         <div class="side-box-body">
-          under construction 
-
+          <% if visits.present? %>
+            <% visits.first(3).each do |visit| %>
+              <%= visit.comment %> by <%= User.find_by(id: visit.user_id).name %>
+               <%# binding.pry %>
+            <% end %>
+          <% else %>
+          <% end %>
           <% # TODO Wantしたユーザー一覧 %>
           <%# @item.want_users.each do |user| %>
             <%# link_to gravatar_for(user, size: 30), user %>
           <%# end %>
         </div>
       </div>
+<% if false %>
       <div class="text-center">
         <% #TODO 正しいリンク先に %>
         <%= link_to(image_tag("amazon-button.png", {alt: "Amazon詳細ページへ"}), url) %>
       </div>
+<% end %>
     </div>
   </div>
 </div>
