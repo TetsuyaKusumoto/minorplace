@@ -1,6 +1,7 @@
 require 'elasticsearch/model'
 
 class Place < ActiveRecord::Base
+  include Searchable
   validates :name, presence: true, length: { maximum: 140 }
   has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }
   validates_attachment :photo, less_than: 5.megabytes, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }, message: 'ファイル形式が不正です'
@@ -22,54 +23,8 @@ class Place < ActiveRecord::Base
 #      Place.all #全て表示。
 #    end
 #  end
-  include Elasticsearch::Model
-  include Elasticsearch::Model::Callbacks
-  # Set up index configuration and mapping
-    settings index: {
-      number_of_shards:   1,
-      number_of_replicas: 0,
-      analysis: {
-        filter: {
-          pos_filter: {
-            type:     'kuromoji_part_of_speech',
-            stoptags: ['助詞-格助詞-一般', '助詞-終助詞'],
-          },
-          greek_lowercase_filter: {
-            type:     'lowercase',
-            language: 'greek',
-          },
-        },
-        tokenizer: {
-          kuromoji: {
-            type: 'kuromoji_tokenizer'
-          },
-          ngram_tokenizer: {
-            type: 'nGram',
-            min_gram: '2',
-            max_gram: '3',
-            token_chars: ['letter', 'digit']
-          }
-        },
-        analyzer: {
-          kuromoji_analyzer: {
-            type:      'custom',
-            tokenizer: 'kuromoji_tokenizer',
-            filter:    ['kuromoji_baseform', 'pos_filter', 'greek_lowercase_filter', 'cjk_width'],
-          },
-          ngram_analyzer: {
-            tokenizer: "ngram_tokenizer"
-          }
-        }
-      }
-    } do
-      mapping _source: { enabled: true }, 
-_all: { enabled: true, analyzer: "kuromoji_analyzer" } do
-        indexes :id, type: 'integer', index: 'not_analyzed'
-        indexes :name, type: 'string', analyzer: 'kuromoji_analyzer'
-        indexes :comment, type: 'string', analyzer: 'kuromoji_analyzer'
-        indexes :address, type: 'string', analyzer: 'kuromoji_analyzer'
-      end
-    end
+#  include Elasticsearch::Model
+#  include Elasticsearch::Model::Callbacks
 
 
   def want_level
