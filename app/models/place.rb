@@ -24,6 +24,54 @@ class Place < ActiveRecord::Base
 #  end
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks
+  # Set up index configuration and mapping
+    settings index: {
+      number_of_shards:   1,
+      number_of_replicas: 0,
+      analysis: {
+        filter: {
+          pos_filter: {
+            type:     'kuromoji_part_of_speech',
+            stoptags: ['助詞-格助詞-一般', '助詞-終助詞'],
+          },
+          greek_lowercase_filter: {
+            type:     'lowercase',
+            language: 'greek',
+          },
+        },
+        tokenizer: {
+          kuromoji: {
+            type: 'kuromoji_tokenizer'
+          },
+          ngram_tokenizer: {
+            type: 'nGram',
+            min_gram: '2',
+            max_gram: '3',
+            token_chars: ['letter', 'digit']
+          }
+        },
+        analyzer: {
+          kuromoji_analyzer: {
+            type:      'custom',
+            tokenizer: 'kuromoji_tokenizer',
+            filter:    ['kuromoji_baseform', 'pos_filter', 'greek_lowercase_filter', 'cjk_width'],
+          },
+          ngram_analyzer: {
+            tokenizer: "ngram_tokenizer"
+          }
+        }
+      }
+    } do
+      mapping _source: { enabled: true }, 
+_all: { enabled: true, analyzer: "kuromoji_analyzer" } do
+        indexes :id, type: 'integer', index: 'not_analyzed'
+        indexes :name, type: 'string', analyzer: 'kuromoji_analyzer'
+        indexes :comment, type: 'string', analyzer: 'kuromoji_analyzer'
+        indexes :address, type: 'string', analyzer: 'kuromoji_analyzer'
+      end
+    end
+
+
   def want_level
       count = Ownership.where(type: "want", place_id: self.id).count
       if count > 10      
