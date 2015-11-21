@@ -1,7 +1,7 @@
 require 'elasticsearch/model'
 
 class Place < ActiveRecord::Base
-  include Searchable
+#  include Searchable
   validates :name, presence: true, length: { maximum: 140 }
   has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }
   validates_attachment :photo, less_than: 5.megabytes, content_type: { content_type: ["image/jpg", "image/jpeg", "image/png", "image/gif"] }, message: 'ファイル形式が不正です'
@@ -26,7 +26,7 @@ class Place < ActiveRecord::Base
 #  include Elasticsearch::Model
 #  include Elasticsearch::Model::Callbacks
 
-
+  include Searchable 
   def want_level
       count = Ownership.where(type: "want", place_id: self.id).count
       if count > 10      
