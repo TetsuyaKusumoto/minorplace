@@ -14,7 +14,7 @@ class PlacesController < ApplicationController
         result = request.location
         @hash = ["lat" => result.latitude, "lng" => result.longitude]
       else
-        @hash = ["lat" => 35, "lng" => 139.5]
+        @hash = ["lat" => 36.549959, "lng" => 139.373408]
       end      
     else
       if request.location.present?
